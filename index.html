@@ -529,26 +529,9 @@ let cart = {};
 
 // ── Inicialização ─────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  if (GAS_URL === "https://script.google.com/macros/s/AKfycbzwmvquIyrI2mGAY9kZEnEtDcUseYLSjdbgMtpRFHCcrzRMBDhagyZ5VBpjGjV0LvFEFg/exec") {
-carregarProdutosDemostracao();
-  } else {
-    carregarProdutos();
-  }
+  carregarProdutos();
 });
 
-function carregarProdutosDemostracao() {
-  todosProdutos = [
-    { produtor: 'Quinta do Crasto', vinho: 'Douro Tinto Reserva 2020', preco: 18.50, cor: 'Tinto' },
-    { produtor: 'Herdade do Esporão', vinho: 'Monte Velho Branco 2022', preco: 7.90, cor: 'Branco' },
-    { produtor: 'Niepoort', vinho: 'Redoma Rosé 2022', preco: 14.00, cor: 'Rosé' },
-    { produtor: 'Dirk Niepoort', vinho: 'Twisted Tinto 2021', preco: 11.50, cor: 'Tinto' },
-    { produtor: 'Quinta Nova', vinho: 'Grainha Branco 2023', preco: 9.80, cor: 'Branco' },
-    { produtor: 'Ramos Pinto', vinho: 'Duas Quintas Tinto 2019', preco: 16.00, cor: 'Tinto' },
-  ];
-  todosProdutos = ordenarProdutos(todosProdutos);
-  renderVinhos(todosProdutos);
-  popularFiltroProdutor();
-}
 
 async function carregarProdutos() {
   try {
@@ -726,12 +709,6 @@ async function enviarEncomenda() {
   btn.disabled = true;
   btn.textContent = 'A enviar…';
 
-  if (GAS_URL === "https://script.google.com/macros/s/AKfycbzwmvquIyrI2mGAY9kZEnEtDcUseYLSjdbgMtpRFHCcrzRMBDhagyZ5VBpjGjV0LvFEFg/exec") {
-    // Modo demonstração — simula envio
-    await new Promise(r => setTimeout(r, 1200));
-    mostrarSucesso(nome, email);
-    return;
-  }
 
   try {
     const res = await fetch(GAS_URL, {
